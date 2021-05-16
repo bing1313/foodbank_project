@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Edit User Page </title>
+	</head>
+	<body>
+		<h1>
+            <p>Hi <%=login_user.username%></p> 
+            <p>Edit Your Profile!</p>
+		</h1>
+		<h2>
+			<p>Update Profile Picture</p>
+			<form action="/uploadPhoto" enctype="multipart/form-data" method="POST">
+
+			<input type="file" name="inputPhoto">
+			<input id = "btn" type="submit" value="Update Picture">
+		</form>
+		<form action="/editUser?username=<%=login_user.username%>" method="post">
+			
+			
+			<p>Change Name: <input name = "name">
+			<p>Change Password: <input name ="password">
+            <p>Change Description: <input name ="description">
+            <p>Change Contact Info: <input name ="contact_info">
+			<p>Change Food Availability: <input name ="food_availability">
+			<p>Change Pickup Date: <input name = "pickup_date">
+			<p>Change Pickup Time: <input name = "pickup_time">
+			<p><input type="submit" value="Confirm Changes!">
+		</form>
+		</h2>
+		<h3>
+			<p><a href = "/homepage?username=<%=login_user.username%>">Homepage</a></p>
+			<p><a href = "/deleteuser?username=<%=login_user.username%>">Delete User</a></p>
+		</h3>
+
+		
+	</body> 
+</html>

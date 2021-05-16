@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <link href="/public/css/home.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/6e4e32aad8.js" crossorigin="anonymous"></script>
+		<title id ="home" > Homepage </title> 
+  
+ <!--Icons-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+
+  
+    <script src="http://jashkenas.github.com/coffee-script/extras/coffee-script.js"></script>
+    
+
+
+</head>
+  
+<body>
+  
+  <!-- Beginning Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+     
+   
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+			  <a class="nav-item nav-link active" href="/homepage?username=<%=login_user.username%>">Home <span class="sr-only">(current)</span></a>
+			  <a class="nav-item nav-link" href="/search?typeSearch=restaurant">Restaurant Search</a>
+     		<a class="nav-item nav-link" href="/search?typeSearch=foodBank%>">Food Bank Search</a>
+			</div>
+		</div>
+
+    <div class="nav-item dropdown ml-auto">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           <i class="fa fa-user"></i>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/edit?username=<%=login_user.username%>">Edit Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/">Log out</a>
+        </div>
+      </div>
+  </nav>
+
+  <!-- End Navbar-->
+  
+  <!-- Beginning pic/desc-->
+  
+  <div class="container">
+    <div class="row">
+      <div class="imageContainer border">
+        <img class="img-responsive card-img-top rounded-circle profileImg border border-primary" src="data:image/jpeg;base64,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" >
+
+      </div>
+      
+      <div class="col-md-8 infoSide float-right border">
+        <h5> <%=login_user.username%> </login_user></h5>
+        <p> Contact <%=login_user.contact_info%></p>
+        <button type="button" class="btn btn-info"><a href = "/reviews/<%=login_user.username%>" class="infoBtn">Reviews</a></button>
+        <button type="button" class="btn btn-info">Message</button>
+        <button type="button" class="btn btn-info">Connect</button>
+      </div>
+      
+    </div>
+    
+    <!-- Beginning pic/desc-->
+      
+      <!-- Beginning of Card -->
+      
+    <div class="row">
+
+      <div class="col-md-4 cardDiv border">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Description</h5>
+            <p><%=login_user.description%></p>
+          </div>
+
+          <div class="card-body border-top map">
+            <h5 class="card-title">Location</h5>
+            <p id = "address"> <%=login_user.address%> </p>
+           
+            <!--Beginning of Map-->
+            <div id = "map">
+				
+					    <script>
+              function initMap() {
+                  var map = new google.maps.Map(document.getElementById('map'), {
+                  zoom: 8,
+                  center: {lat: -34.397, lng: 150.644}
+                  });
+                  var geocoder = new google.maps.Geocoder();
+
+                  geocodeAddress(geocoder, map);
+                  
+                }
+
+                function geocodeAddress(geocoder, resultsMap) {
+                  var address = document.getElementById('address').innerHTML;
+                  console.log('this is the address')
+                  console.log(address)
+                  //var address = "3820 Locust Walk, Philadelphia, PA 19104";
+                  geocoder.geocode({'address': address}, function(results, status) {
+                  if (status === 'OK') {
+                    resultsMap.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                    map: resultsMap,
+                    position: results[0].geometry.location
+                    });
+
+                    console.log('this is the position')
+                    console.log(marker.position)
+
+                  } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                  }
+                  });
+              }
+					    </script>
+				    </div>
+
+            <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMS3iChdrsxGpUACmdoF90fGMrLS6u2Ok&callback=initMap">
+            </script>
+          <!--End of Map-->
+          </div>
+          <!-- End of the Location Div-->
+          
+
+
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Website</li>
+          </ul>
+
+          <div class="card-body">
+            <a href="/reviews/<%=login_user.username%>" class="card-link">Reivews</a>
+            <a href="/edit?username=<%=login_user.username%>" class="card-link">Edit Profile</a>
+          </div>
+           
+            
+          
+
+        </div>
+      </div>
+      <!-- End of Card -->
+
+      <!--Beginning of FoodStock-->
+      
+      <div class="col-md-8 border foodStock">
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Vegetables</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+          </div>
+        </nav>
+
+        <div class="tab-content" id="nav-tabContent"> 
+          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            
+            <div class="foodTable">
+             <table class="table table-bordered mb-0" id="vegTable">
+								 
+               <thead>
+                 <tr>
+                   <th>Food Name</th>
+                   <th>Units</th>
+                   <th>Actions</th>
+                 </tr>
+               </thead>
+               <tbody>
+
+               </tbody>
+              </table>
+            </div>
+
+            <!--Form beginning-->
+            <div class="inputForm">
+            <form action = "/addVeggie" method="post" id="vegForm">
+              <div class="form-row mx-0">
+                <div class="col-5 px-1">
+                <div class="md-form">
+                  <input type="text" id="foodName" name ="foodName" class="form-control input" placeholder="Food Name">
+                </div>
+                </div>
+                
+
+                <div class="col px-1">
+                <div class="md-form">
+                  <input type="text" id="number" name="number" class="form-control input" placeholder="Number">
+                </div>
+                </div>
+                
+
+                <div class="col px-1">
+                <div class="md-form">
+                  <input type="text" id="units" name="units" class="form-control input" placeholder="Units">
+                </div>
+                </div>
+                
+              </div>
+              <div class="formButtons">
+                <input type="submit" class="add-row btn btn-primary btn-sm" value="Add Row">
+                <input type="reset" class="btn btn-primary btn-sm"value="Reset">
+              </div>  
+              </form>
+            </div>
+            <!--Form Ending-->
+            <!--Begging of Table JS-->
+             <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+            <script>
+
+              function rowIndex(x) {
+                console.log('row index')
+                var rowIndex = x.rowIndex
+                console.log(x.rowIndex)
+                var editButton = document.getElementById("edit")
+                editButton.id = "edit" + rowIndex
+                console.log('this is the new id' + editButton.id)
+                
+
+              }
+              showRow()
+              function showRow() {
+                  $(document).ready(function(){
+                    $(".add-row").click(function(){
+                    var food = $("#foodName").val();
+                    var number = $("#number").val();
+                    var units= $("#units").val();
+                    
+                    if (food != "" && number != "" && units != "") {
+                    var newRow = '<tr "><td>' + food + "</td><td>" + number + " " + units + "</td><td>" + 
+                    '<button class="btn btn-light border tbtn btn-sm" onclick="rowIndex(this)" id="edit"><i class="fas fa-pen"></i></button>' +"  " +
+                    '<form action="/mDelete?row=rowIndex(this)" method="post"><button type="submit" class="btn btn-light border tbtn btn-sm" onclick="deleteR(this)"><i class="fas fa-trash" ></i></button></form>' + "</td></tr>";
+                    
+                    $("table tbody").append(newRow);
+
+
+
+                    /*$("#actions").click(function() {
+                    console.log('the buttons were clicked')
+                    })*/
+                    
+                    }
+
+                  })
+
+                })
+              }
+
+              
+
+              var $table = $('#yourTableID');
+              $(function () {
+                $table.on('click-row.bs.table', function (e, row, $element) {
+                  
+
+                });
+              });
+
+              
+              function deleteR(btn){
+                $(btn).parents("tr").remove();
+                var row = btn.roleIndex;
+
+
+              }
+
+              var vegTable =  JSON.parse('<%-JSON.stringify(veg)%>');
+              console.log("this is the veg table")
+              console.log(vegTable)
+
+              for(var a = 0; a < vegTable.length; a++){
+                var curr = vegTable[a];
+                var food = curr.foodName
+                var number = curr.number
+                var units = curr.units
+
+                var newRow = '<tr "><td>' + food + "</td><td>" + number + " " + units + "</td><td>"+ 
+                    '<button class="btn btn-light border tbtn btn-sm" onclick="rowIndex(this)" id="edit"><i class="fas fa-pen"  ></i></button>' +"  " +
+                   '<button href="/mDelete?row=hello" type="submit" class="btn btn-light border tbtn btn-sm deleteBtn" onclick="deleteR(this)"><i class="fas fa-trash" ></i></button>' + "</td></tr>";
+
+
+                $("table tbody").append(newRow);
+
+              }
+
+              $('deleteBtn').click(function () {
+                  $.post('/mDelete')
+              })
+
+
+
+              //save contents of things to table
+              
+
+
+                      </script>
+            <!--End of Table JS-->
+
+          </div> <!--End of Veggies Section-->
+
+          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+          <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+        </div>
+      </div>
+      
+      
+      
+
+
+    </div> <!-- End of 2nd row -->
+  </div><!-- End of Container -->
+  
+  
+  
+   
+  
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>

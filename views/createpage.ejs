@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Create User Page </title>
+	</head>
+	<body>
+		<h1>
+			Sign up! 
+		</h1>
+		<h2>
+		<form action="/createUser" method="post">
+			<p>Name: <input name = "name">
+			<p>Username: <input name ="username">
+			<p>Password: <input name ="password"></h2>
+			<p>Please indicate your business type</p>
+				<p><input type="radio" name="profileType" value='restaurant'> Restaurant
+				<input type="radio" name="profileType" value="foodBank"> Food Bank
+				<input type="radio" name="profileType" value="User"> User
+			</p>
+			<p>Company Address: <input name ="companyAddress"></h2>
+
+			<p> Adress Line 1: <input name = "line1" placeholder="Street address, P.O Box, company name"></p>
+			<p> Adress Line 2: <input name = "line2" placeholder="Apartment, suite, building, floor, etc"></p>
+			<p>	City: <input name = "city"></p>
+			<p>	State: <input name = "state"></p>
+			<p>	Zipcode: <input name = "zipcode"></p>
+			
+			
+				<p><input type="submit" value="Sign Up!">
+			
+		</form>
+		</h2>
+		<h3>
+		</h3>
+
+		
+	</body> 
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<title>Reviews</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	  <style type="text/css">
+      body {
+          background-color: #232222;
+        }
+      .box {
+          width: 100%;
+          height: 100%;
+          position: fixed;
+          top:0px;
+          left:0px;
+          background-color: rgba(0,0,0,.5);
+        }
+      .box > .review {
+          background-color: #FFF;
+          width: 50%;
+          height: 45%;
+          padding: 10px;
+          margin-left: 25%;
+          margin-right: 25%;
+          margin-top: 200px;
+          margin-bottom: 50px;
+        }
+      #review-text {
+          width: 80%;
+          height: 40%;
+          margin-top: 4%;
+          margin-left: 9%;
+          margin-bottom: 3%;
+          font-size: 25px;
+          font-family: "Times New Roman";
+        }
+      #post-review {
+        	float: right;
+        }
+      #new-review {
+          width: 40%;
+          margin-left: 30%;
+        }
+      .btn {
+          text-decoration: none;
+          width: 20%;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          color: white;
+          background-color: #872036;
+          display: inline-block;
+          cursor: pointer;
+          margin-bottom: 16px;
+          font-size: 14px;
+          text-align: center;
+        }
+        .btn:hover {
+          background-color: #872036; 
+          box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+        .buttons {
+          margin-left: 32%;
+        }
+        .btnn {
+          text-decoration: none;
+          width: 10%;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          color: white;
+          background-color: #872036;
+          display: inline-block;
+          cursor: pointer;
+          font-size: 14px;
+          border-radius: 10%;
+          text-align: center;
+        }
+        .btnn:hover {  
+          background-color: #E79206; 
+          box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+        #option {
+          margin-left: 33%;
+        }
+        .checked {
+          color: orange;
+        }
+        .card {
+          margin-left: 30%;
+          color: white;
+          background-color: grey;
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+          transition: 0.3s;
+          width: 40%;
+          height: 40%;
+          border-radius: 5px;
+          margin-bottom: 2%;
+        }
+        .container {
+          padding: 16px 16px;
+        }
+        #comment {
+          border-radius: 5px;
+          padding: 3px;
+          width: 80%;
+        }
+        #post-comment {
+          border-radius: 5px;
+          padding: 4px 8px;
+          border: 2px solid grey;
+        }
+        #post-comment:hover {
+          box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+          cursor: pointer;
+        }
+      </style>
+	</head>
+	<body>
+    <input class="btn" id="new-review" type='submit' value="ADD REVIEW"></input>
+    <div class="card">
+      <div class="container">
+      <h3> AVERAGE RATING [<%=numreviews%> ratings]</h3>
+     <% for(var i = 0; i < avg; i++) { %>
+      <span class="fa fa-star checked"></span>
+      <% } %>
+      <% for(var i = 0; i < 5 - avg; i++) { %>
+      <span class="fa fa-star"></span>
+      <% } %>
+    </div>
+    </div>
+    <div id="reviews">
+          <% reviews.forEach(function(r) { %> 
+          <div class="card">
+            <div class="container">
+              <b><%=r.author%></b>&nbsp
+              <% for(var i = 0; i < r.rating; i++) { %>
+              <span class="fa fa-star checked"></span>
+              <% } %>
+              <% for(var i = 0; i < 5 - r.rating; i++) { %>
+              <span class="fa fa-star"></span>
+              <% } %>
+              </br></br>
+              <b> "<%=r.review%>"</b>
+              </br><br>
+              <h4> Comments: </h4>
+              <% for(var i = 0; i < r.comments.length; i++) { %>
+              <p> <b> <%=r.comments[i].author%></b> : <%=r.comments[i].comment%></p>
+              <% } %>
+              <form action="/addcomment/<%=r._id%>" method="get">
+                <input type="text" id="comment" name="comment" value="">
+                <input type="submit" id="post-comment" value="Post Comment">
+              </form>
+            </div>
+          </div>
+          <% }) %>
+    </div>
+      <div class="box" style="display:none">
+        <div class="review">
+        <input id="review-text" type="text"></br>
+        <p id="option"></p>
+        <div class="buttons">
+        <input class="btnn" type='submit' value="1" id="1"></input>
+        <input class="btnn" type='submit' value="2" id="2"></input>
+        <input class="btnn" type='submit' value="3" id="3"></input>
+        <input class="btnn" type='submit' value="4" id="4"></input>
+        <input class="btnn" type='submit' value="5" id="5"></input></br>
+        </div>
+        <input class="btn" type='submit' value="CLOSE" id="close"></input>
+         <input class="btn" type='submit' id="post-review" value='POST REVIEW!' />     
+        </div>
+      </div>
+<script>
+  var selectedRating = 0;
+  $("#1").click(function(){
+    selectedRating =$(this).attr("value");
+    var x = document.getElementById("1").value;
+    document.getElementById("option").innerHTML = "Your rating: " + x + " (Are you sure?)";
+  });
+  $("#2").click(function(){
+    selectedRating =$(this).attr("value");
+    var x = document.getElementById("2").value;
+    document.getElementById("option").innerHTML = "Your rating: " + x + " (What could we do better?)";
+  });
+  $("#3").click(function(){
+    selectedRating =$(this).attr("value");
+    var x = document.getElementById("3").value;
+    document.getElementById("option").innerHTML = "Your rating: " + x + " (What did you like about us?)";
+  });
+  $("#4").click(function(){
+    selectedRating =$(this).attr("value");
+    var x = document.getElementById("4").value;
+    document.getElementById("option").innerHTML = "Your rating: " + x + " (Great news! We'd love make it up)";
+  });
+  $("#5").click(function(){
+    selectedRating =$(this).attr("value");
+    var x = document.getElementById("5").value;
+    document.getElementById("option").innerHTML = "Your rating: " + x + " (We are honoured!)";
+  });
+  $('#post-review').on('click', function () {
+    var rating = selectedRating;
+    var loc = window.location.href;
+    var href = loc.split("/");
+      $.ajax({
+      url: '/addreview',
+      data: { 
+        review: $('#review-text').val(), 
+        userrating: rating,
+        myreview: href[4]
+      },
+      type: 'PUT',
+      success: function(res) { 
+        $('.box').css('display', 'none');
+        location.reload(); 
+      }
+    })
+  })
+	 $('#new-review').on('click', function () {
+    	$('.box').css('display', 'block');
+  	})
+
+  	$('#close').on('click', function () {
+    	$('.box').css('display', 'none');
+  	})
+</script>		
+	</body> 
+</html>

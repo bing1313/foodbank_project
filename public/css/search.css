@@ -1,0 +1,14 @@
+#search{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+	align-items: center;
+	
+}
+
+#cardList{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  
+}

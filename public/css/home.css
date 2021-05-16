@@ -1,0 +1,146 @@
+p {
+	
+}
+
+#map {
+	width: 100%;
+   height: 50%;
+   background-color: grey;
+ }
+
+td {
+    font-size: 20%;
+}
+
+th {
+    font-size: 20%;
+}
+
+tr:hover {
+          background-color: t#DCDCDC;
+		}
+		
+.table.no-cellpadding td {
+  padding: 0;
+}
+
+
+.input::-webkit-input-placeholder {
+    color:grey;
+    font-size: 12px
+}
+
+.input{
+  height: 10%;
+}
+
+#vegs{
+  height: 20%;
+  overflow: auto;
+
+}
+
+#map{
+  height: 260px;
+}
+
+#list{
+  font-size: 50%;
+}
+
+.dropdown-menu{
+  margin-right: 50px;
+}
+
+
+
+.profileImg{ 
+  
+     
+     width:120%; 
+     height:115%;
+     object-fit:cover;
+     margin-left:-10%;
+   
+}
+
+
+.imageContainer{
+  
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+    text-align:center;
+  
+    margin-top: 10%;
+    margin-bottom: 10%;
+    margin-left:auto;
+    margin-right: auto;
+
+ 
+}
+
+.infoSide{ 
+ padding-top: 5%;
+ padding-bottom: 5%;
+ border-radius: 10px;
+ margin-top: 5%;
+ margin-bottom: 5%;
+ 
+}
+
+.border{
+   border-width:3px !important;
+}
+
+.infoSide.border{
+  border-width:1px !important;
+}
+
+.infoBtn{
+  color: white;
+}
+
+.foodStock{
+  height:600px; 
+  overflow: scroll;
+}
+
+.foodTable{
+  margin-bottom: 2%;
+}
+
+.inputForm {
+  margin-left: -1.5%;
+  margin-bottom: 2%;
+}
+
+.formButtons{
+  margin-left: 1%;
+  margin-top: 2%;
+}
+
+table{
+  font-size: 60px;
+}
+
+i.fa-trash {
+  
+}
+
+.tbtn{
+  height: 40px;
+}
+
+.trashbtn {
+  border: 1px;
+}
+
+input[type="submit"] {
+    font-family: FontAwesome;
+}
+
+.submitbtn {
+  font-family: FontAwesome;
+}

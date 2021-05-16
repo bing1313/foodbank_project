@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+	
+	<link href="/public/css/search.css" rel="stylesheet" type="text/css">
+	   		
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 50%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+
+
+		<!-- Navigation Bar-->
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand">!FoodWaste</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+			<a class="nav-item nav-link active" href="/homepage?username=<%=username%>">Home <span class="sr-only">(current)</span></a>
+			<a class="nav-item nav-link" href="/search?typeSearch=restaurant">Restaurant Search</a>
+     		<a class="nav-item nav-link" href="/search?typeSearch=foodBank%>">Food Bank Search</a>
+			</div>
+		</div>
+		</nav>
+
+
+
+
+
+	<!-- Search form -->
+		<div class="container">
+			<div class="row">
+			<p class="text-center"> Search by Zipcode</p>
+				<div id="search" class="col">
+				
+				<form action="/zipcodeSearch" method="post">
+					<input name="zipcode" id="searchbar" class="form-control w-80"  type="text" placeholder="Search" aria-label="Search" value="<%=zipcodeSearch%>">
+					<input type="submit" value="Search">
+				</form>
+				
+				
+
+			</div>
+			</div>
+		</div>
+	
+	<div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+		});
+		
+		var geocoder = new google.maps.Geocoder();
+		var a = "<%=address%>"
+		console.log('address' + a)
+		geocodeAddress(geocoder, map);
+
+		
+	  }
+
+	  function geocodeAddress(geocoder, resultsMap) {
+			//var address = document.getElementById('address').innerHTML;
+			var markersArr = JSON.parse('<%-JSON.stringify(markerAddress)%>'); //"<%= markerAddress%>;
+			console.log('markerarrr')
+			console.log(markersArr)
+			
+			//var address = "3820 Locust Walk, Philadelphia, PA 19104";
+
+			for (var i = 0; i < markersArr.length; i++){
+				geocoder.geocode({'address': markersArr[i]}, function(results, status) {
+				if (status === 'OK') {
+					resultsMap.setCenter(results[0].geometry.location);
+					var marker = new google.maps.Marker({
+					map: resultsMap,
+					position: results[0].geometry.location
+					});
+
+					console.log('this is the position')
+					console.log(marker.position)
+
+				} else {
+					alert('Geocode was not successful for the following reason: ' + status);
+				}
+				});
+			}
+			
+		}
+
+	  
+
+	</script>
+
+	
+
+	<div class="card divList w-75 text-center" id="cardList">
+		
+	</div>
+	
+	<script type='text/javascript'>
+	var arr = JSON.parse('<%-JSON.stringify(resultsArr)%>');
+	
+	console.log("this is result array" +arr)
+	
+	showResults()
+	function showResults() {
+		var markersArr = []
+		for(var i = 0; i <arr.length; i++){
+			var currUser = arr[i];
+			markersArr.push(currUser.address)
+			console.log('goes through the for loop')
+			
+			var username = currUser.username
+			var route = "/homepage?username=" + username
+			var node = document.createElement("div");
+			node.innerHTML = '<h5 class="card-title">' + username + '</h5>' +
+			'<p class="card-text">' + 'Adddress: ' + currUser.address +'</p>' +
+			  '<a href="' + route + '" class="btn btn-primary">See Profile</a>';
+			
+			
+			node.setAttribute("class", "list-group-item list-group-item-action");
+			var div = document.getElementById('cardList')
+			div.appendChild(node);
+			//document.getElementById("cardList").appendChild(node);
+			
+		}
+		
+		//calls geocode
+		
+
+
+		
+	}
+	</script>
+
+	
+
+	
+	
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMS3iChdrsxGpUACmdoF90fGMrLS6u2Ok&callback=initMap"
+    async defer></script>
+  
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&v=3&libraries=geometry"></script>
+	<script>
+
+
+	</script>
+
+
+
+		 <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
